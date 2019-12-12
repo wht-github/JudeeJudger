@@ -163,10 +163,10 @@ def judge(id, code, lang, problem, contest, username):
             logging.debug('Judging %s %s' % (incase, outcase))
             incasePath = './ProblemData/ttt/%s/%s' % (problem, incase)
             outcasePath = './ProblemData/ttt/%s/%s' % (problem, outcase)
-            # outputPath = './UserData/%s/%s/%s' % (username, problem, outcase)
-            # errorPath = './UserData/%s/%s/%s' % (username, problem, caseid)
-            outputPath = './RT/out.txt'
-            errorPath = './RT/error.txt'
+            outputPath = './UserData/%s/%s/%s' % (username, problem, outcase)
+            errorPath = './UserData/%s/%s/%s' % (username, problem, caseid)
+            # outputPath = './RT/out.txt'
+            # errorPath = './RT/error.txt'
             # logging.info('go')
             if lang == 'C':
                 result = judgeC(timelimit, memorylimit, incasePath,
