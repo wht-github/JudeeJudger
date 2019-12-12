@@ -1,0 +1,3 @@
+tmp_32.cpp:1:1: error: ‘lkhlkh’ does not name a type
+    1 | lkhlkh
+      | ^~~~~~
