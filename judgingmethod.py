@@ -211,7 +211,7 @@ def judge(id, code, lang, problem, contest, username):
     except CompilerError as e:
         compilemsg = e.args
         logging.debug('Compile Error %s' % compilemsg)
-        # update_problem_by_id(id,-2)
+        update_problem_by_id(problem,-2)
         update_submission_by_id(id,-2,compilemsg)
         Running_Status = True
         # raise e
@@ -221,7 +221,7 @@ def judge(id, code, lang, problem, contest, username):
         raise e
     else:
         logging.debug('All success')
-        # update_problem_by_id(id,retnum)
+        update_problem_by_id(problem,retnum)
         update_submission_userdata(id,retnum,result_list,username,problem,testcaseScore)
         Running_Status = True
     # finally:

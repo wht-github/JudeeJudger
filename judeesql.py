@@ -297,6 +297,8 @@ def update_userdata(user_id, problem_id, result, score):
                 user_userdata.submit,
                 user_userdata.score,
                 user_userdata.ac_prob,
+                user_userdata.ranking,
+                user_userdata.username_id
             )
             .where(user_userdata.username_id == user_id)
             .get()
@@ -304,7 +306,7 @@ def update_userdata(user_id, problem_id, result, score):
 
         userdata.submit += 1
 
-        ac_prob = list(map(lambda x: int(x.strip()), userdata.ac_prob.split()))
+        ac_prob = list(map(int, userdata.ac_prob.strip().split('|')))
         if problem_id not in ac_prob:
             userdata.ac += 1
             userdata.ac_prob += "|%d" % problem_id
@@ -319,7 +321,7 @@ def update_userdata(user_id, problem_id, result, score):
         add_score = max(score - max_score, 0)
         userdata.score += add_score
 
-        return userdata.save()
+        return userdata.save(only=['ac','submit','score','ac_prob'])
 
 
 def update_ocrank_by_cid_uid(contest_id, user_id, submission_add, total_score_add):
