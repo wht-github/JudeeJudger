@@ -26,3 +26,18 @@ FATAL [2019-12-06 15:38:20] [/home/wang/Workspace/OJ/LPOJ/Judger/src/runner.c:39
 FATAL [2019-12-06 15:38:28] [/home/wang/Workspace/OJ/LPOJ/Judger/src/runner.c:39]Error: ROOT_REQUIRED
 FATAL [2019-12-06 15:39:01] [/home/wang/Workspace/OJ/LPOJ/Judger/src/runner.c:39]Error: ROOT_REQUIRED
 FATAL [2019-12-06 15:39:54] [/home/wang/Workspace/OJ/LPOJ/Judger/src/runner.c:39]Error: ROOT_REQUIRED
+FATAL [2019-12-13 20:17:47] [/home/wang/Workspace/OJ/LPOJ/Judger/src/child.c:87]Error: System errno: No such file or directory; Internal errno: DUP2_FAILED
+FATAL [2019-12-13 20:20:01] [/home/wang/Workspace/OJ/LPOJ/Judger/src/child.c:87]Error: System errno: No such file or directory; Internal errno: DUP2_FAILED
+FATAL [2019-12-13 20:22:42] [/home/wang/Workspace/OJ/LPOJ/Judger/src/child.c:87]Error: System errno: No such file or directory; Internal errno: DUP2_FAILED
+FATAL [2019-12-13 20:33:21] [/home/wang/Workspace/OJ/LPOJ/Judger/src/runner.c:39]Error: ROOT_REQUIRED
+FATAL [2019-12-13 20:33:33] [/home/wang/Workspace/OJ/LPOJ/Judger/src/child.c:87]Error: System errno: No such file or directory; Internal errno: DUP2_FAILED
+FATAL [2019-12-13 20:36:15] [/home/wang/Workspace/OJ/LPOJ/Judger/src/child.c:87]Error: System errno: No such file or directory; Internal errno: DUP2_FAILED
+FATAL [2019-12-13 20:36:18] [/home/wang/Workspace/OJ/LPOJ/Judger/src/child.c:87]Error: System errno: No such file or directory; Internal errno: DUP2_FAILED
+FATAL [2019-12-13 20:36:20] [/home/wang/Workspace/OJ/LPOJ/Judger/src/child.c:87]Error: System errno: No such file or directory; Internal errno: DUP2_FAILED
+FATAL [2019-12-13 20:40:43] [/home/wang/Workspace/OJ/LPOJ/Judger/src/runner.c:39]Error: ROOT_REQUIRED
+FATAL [2019-12-13 20:40:48] [/home/wang/Workspace/OJ/LPOJ/Judger/src/child.c:87]Error: System errno: No such file or directory; Internal errno: DUP2_FAILED
+FATAL [2019-12-13 20:42:58] [/home/wang/Workspace/OJ/Judee/src/child.c:87]Error: System errno: No such file or directory; Internal errno: DUP2_FAILED
+FATAL [2019-12-13 20:43:00] [/home/wang/Workspace/OJ/Judee/src/child.c:87]Error: System errno: No such file or directory; Internal errno: DUP2_FAILED
+FATAL [2019-12-13 20:43:35] [/home/wang/Workspace/OJ/Judee/src/child.c:87]Error: System errno: No such file or directory; Internal errno: DUP2_FAILED
+FATAL [2019-12-13 20:45:04] [/home/wang/Workspace/OJ/Judee/src/child.c:87]Error: System errno: No such file or directory; Internal errno: DUP2_FAILED
+FATAL [2019-12-13 20:45:05] [/home/wang/Workspace/OJ/Judee/src/child.c:87]Error: System errno: No such file or directory; Internal errno: DUP2_FAILED

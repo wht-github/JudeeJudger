@@ -1,6 +1,7 @@
 import json
 import subprocess
 
+
 UNLIMITED = -1
 VERSION = 0x020101
 
@@ -12,6 +13,7 @@ RESULT_MEMORY_LIMIT_EXCEEDED = 3
 RESULT_RUNTIME_ERROR = 4
 RESULT_SYSTEM_ERROR = 5
 
+ERROR_NOT_FOUND = 0
 ERROR_INVALID_CONFIG = -1
 ERROR_FORK_FAILED = -2
 ERROR_PTHREAD_FAILED = -3
@@ -76,9 +78,11 @@ def run(max_cpu_time,
         raise ValueError("seccomp_rule_name must be a string or None")
     if seccomp_rule_name:
         proc_args.append("--seccomp_rule={}".format(seccomp_rule_name))
-
+    # print(1321)
     proc = subprocess.Popen(proc_args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out, err = proc.communicate()
+    # print(out,err)
+    # print('get it')
     if err:
         raise ValueError("Error occurred while calling judger: {}".format(err))
     return json.loads(out.decode("utf-8"))

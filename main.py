@@ -25,6 +25,18 @@ Judging Flow:
 Dictionary:
     ProblemData/?/[#.in, #.out] -- ? is the problem id, # is the testcase id
     UserData/?/[#.output, #.error]  -- ? is the User id, # is corresponding to the testcase id
+CODE:
+    -2: "COMPILE_ERROR",
+    -1: "WRONG_ANSWER",
+    0: "ACCEPTED",
+    1: "CPU_TIME_LIMIT_EXCEEDED",
+    2: "REAL_TIME_LIMIT_EXCEEDED",
+    3: "MEMORY_LIMIT_EXCEEDED",
+    4: "RUNTIME_ERROR",
+    5: "SYSTEM_ERROR",
+    6: "PENDING",
+    7: "JUDGING",
+    8: "PARTIALLY_ACCEPTED",
 
 '''
 
@@ -40,9 +52,11 @@ def run():
                 submissionId = get_consumer_from_singlePool(
                     'submission').consume()
                 logging.debug('Get Submission ID %s' % submissionId)
-                judeesql.update_submission_by_id(submissionId, 7, False)
+                judeesql.update_submission_by_id(submissionId, 7)
                 submissionInfo = judeesql.get_submission_by_id(
                     submissionId, dic=True)
+                logging.debug('Judging Submission %s' % submissionId)
+
                 t = threading.Thread(target=judge, args=(submissionInfo['ID'], submissionInfo['code'], submissionInfo['language'], submissionInfo['problem_id'],
                                                          submissionInfo['contest_id'], submissionInfo['username_id']))
                 t.setDaemon(True)

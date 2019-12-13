@@ -6,7 +6,7 @@ from pars import *
 import logging
 import filecmp
 from pars import *
-from judeesql import update_submission_by_id, update_ocrank_by_cid_uid, get_contest_type, get_problem_info
+from judeesql import update_submission_by_id, update_ocrank_by_cid_uid, get_contest_type, get_problem_info, update_submission_userdata, update_problem_by_id
 
 
 def judgePython3(timelimit, memorylimit, inputpath, outputpath, errorpath, id, judgername):
@@ -136,37 +136,43 @@ def judge(id, code, lang, problem, contest, username):
         contest: 属于哪个比赛的提交，为0时，不属于任何比赛的提交
         username: user id
     '''
-    os.system('sshpass -p "hhs123456" rsync -r  h2s@snail.leeeung.com:/volume4/homes/h2s/test_cases/ /home/wang/Workspace/OJ/Judee/ProblemData/ttt/ --delete')
+    logging.debug('Synchonizing the TestCases')
+    os.system('sshpass -p "hhs123456" rsync -r  h2s@snail.leeeung.com:/volume4/homes/h2s/test_cases/ /home/wang/Workspace/OJ/Judee/ProblemData/ --delete')
+    logging.debug('Synchonizing Finished')
+
     rule = ''
     if contest is not None:
         rule = get_contest_type(id).rule_type
-    limits = get_problem_info(problem, True)
-    timelimit = limits['time_limit']
-    memorylimit = limits['memory_limit']
+    problemInfo = get_problem_info(problem, True)
+    timelimit = int(problemInfo['time_limit'])
+    memorylimit = int(problemInfo['memory_limit'])
+    testcaseScore = problemInfo['test_case_score'] 
+    logging.debug('MemoryLimit: %d TimeLimit: %d' % (memorylimit, timelimit))
+
     retnum = 0
+    info = []
+    result_list = []
     try:
-        # os.
         tests = PackupTestcases(problem)
-        info = []
+
         if lang == 'C':
             compileC(id, code, problem)
         elif lang == 'C++':
             compileCPP(id, code, problem)
         elif lang == 'Python3':
-            logging.debug('write')
             compilePython3(id, code, problem)
         else:
             raise Exception('No language support')
-        result_list = []
+
         for incase, outcase in tests:
             caseid = incase.split('.')[0]
             logging.debug('Judging %s %s' % (incase, outcase))
-            incasePath = './ProblemData/ttt/%s/%s' % (problem, incase)
-            outcasePath = './ProblemData/ttt/%s/%s' % (problem, outcase)
-            outputPath = './UserData/%s/%s/%s' % (username, problem, outcase)
-            errorPath = './UserData/%s/%s/%s' % (username, problem, caseid)
-            # outputPath = './RT/out.txt'
-            # errorPath = './RT/error.txt'
+            incasePath = './ProblemData/%s/%s' % (problem, incase)
+            outcasePath = './ProblemData/%s/%s' % (problem, outcase)
+            # outputPath = './UserData/%s/%s/%s' % (username, problem, outcase)
+            # errorPath = './UserData/%s/%s/%s' % (username, problem, caseid)
+            outputPath = './RT/out.txt'
+            errorPath = './RT/error.txt'
             # logging.info('go')
             if lang == 'C':
                 result = judgeC(timelimit, memorylimit, incasePath,
@@ -178,20 +184,23 @@ def judge(id, code, lang, problem, contest, username):
                 result = judgePython3(timelimit, memorylimit, incasePath,
                                       outputPath, errorPath, id, "tmp_"+str(problem))
             if rule == 'ACM':
-
                 pass
             elif rule == 'OI':
                 pass
             else:
                 pass
+
             if result['result'] == 0:
-                logging.debug('case pass')
+                logging.debug('Running Successfully')
                 if retnum == 0:
-                    retnum = 0
+                    retnum = 0 if filecmp.cmp(outcasePath, outputPath) else -1
+                    logging.debug('case result is %d' % retnum)
             else:
                 retnum = result['result']
-                logging.debug('case failed')
+                logging.debug('case failed with %d' % retnum)
 
+            with open(errorPath, 'r') as errordata:
+                result['errorinfo'] = errordata.read()
             result_list.append(result)
 
         print(result_list)
@@ -200,10 +209,10 @@ def judge(id, code, lang, problem, contest, username):
         # Update the Database
 
     except CompilerError as e:
-        msg = e.args
-        info.append(msg)
-        logging.debug('Compile Error %s' % msg)
-        update_submission_by_id(id, -2, True, msg, {})
+        compilemsg = e.args
+        logging.debug('Compile Error %s' % compilemsg)
+        # update_problem_by_id(id,-2)
+        update_submission_by_id(id,-2,compilemsg)
         Running_Status = True
         # raise e
 
@@ -212,11 +221,12 @@ def judge(id, code, lang, problem, contest, username):
         raise e
     else:
         logging.debug('All success')
-        # if retnum == 0:
-        #     # updateProblemSubmission(problem,)
-        #     pass
-        update_submission_by_id(id, retnum, True, {}, result_list)
+        # update_problem_by_id(id,retnum)
+        update_submission_userdata(id,retnum,result_list,username,problem,testcaseScore)
         Running_Status = True
+    # finally:
+    #     Running_Status = True
+
     # finally:
     #     # update_submission_by_id(id,)
     #     Running_Status = True

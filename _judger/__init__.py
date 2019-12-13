@@ -1,7 +1,6 @@
 import json
 import subprocess
 
-RESULT_WA = -2
 
 UNLIMITED = -1
 VERSION = 0x020101
@@ -14,6 +13,7 @@ RESULT_MEMORY_LIMIT_EXCEEDED = 3
 RESULT_RUNTIME_ERROR = 4
 RESULT_SYSTEM_ERROR = 5
 
+ERROR_NOT_FOUND = 0
 ERROR_INVALID_CONFIG = -1
 ERROR_FORK_FAILED = -2
 ERROR_PTHREAD_FAILED = -3
@@ -50,8 +50,8 @@ def run(max_cpu_time,
                 "max_process_number", "uid", "gid", "memory_limit_check_only"]
     str_vars = ["exe_path", "input_path", "output_path", "error_path", "log_path"]
 
-    proc_args = ["/home/wang/Workspace/OJ/Judee/_judger/libjudger.so"]
-
+    proc_args = ["/home/wang/Workspace/OJ/Judee/output/libjudger.so"]
+    # proc_args = ["/usr/lib/judger/libjudger.so"]
     for var in str_list_vars:
         value = vars()[var]
         if not isinstance(value, list):
