@@ -440,8 +440,8 @@ def update_userdata(user_id, problem_id, result, score):
 def update_oi_rank(contest_id, user_id, problem_id, problem_score):
     with db.connection_context():
         record = oi_contest_rank.get_or_none(
-            oi_contest_rank.contest_id == contest_id
-            & oi_contest_rank.user_id == user_id
+            oi_contest_rank.contest_id == contest_id,
+            oi_contest_rank.user_id == user_id
         )
 
     if record is None:
