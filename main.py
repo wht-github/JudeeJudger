@@ -14,6 +14,10 @@ from PCModel import *
 from judgingmethod import judge
 import judeesql
 from pars import *
+logger = logging.getLogger("root")
+# logger.basicConfig(level='DEBUG', format='%(name)s - %(levelname)s - %(message)s',)
+logger.setLevel(logging.DEBUG)
+logger.addHandler(logging.StreamHandler())
 '''
 Judging Flow:
     1. Get the Submission ID from Judge Server
@@ -48,17 +52,17 @@ def run():
         if RunningStatus.status:
             RunningStatus.status = False
             try:
-                logging.debug('Trying to Get Submission')
+                logger.debug('Trying to Get Submission')
                 submissionId = get_consumer_from_singlePool(
                     'submission').consume()
-                logging.debug('Get Submission ID %s' % submissionId)
-                judeesql.update_submission_by_id(submissionId, 7)
+                logger.debug('Get Submission ID %s' % submissionId)
+                judeesql.update_submission(submissionId, 7)
                 submissionInfo = judeesql.get_submission_by_id(
                     submissionId, dic=True)
-                logging.debug('Judging Submission %s' % submissionId)
+                logger.debug('Judging Submission %s' % submissionId)
 
                 t = threading.Thread(target=judge, args=(submissionInfo['ID'], submissionInfo['code'], submissionInfo['language'], submissionInfo['problem_id'],
-                                                         submissionInfo['contest_id'], submissionInfo['username_id']))
+                                                         submissionInfo['contest_id'], submissionInfo['username_id'], submissionInfo['create_time']))
                 t.setDaemon(True)
                 t.start()
                 RunningStatus.status = True
@@ -67,8 +71,9 @@ def run():
 
 
 if __name__ == '__main__':
-    logging.basicConfig(
-        level='DEBUG', format='%(name)s - %(levelname)s - %(message)s')
+    # logger = logging.getLogger("root")
+    # logger.basicConfig(
+        # level='DEBUG', format='%(name)s - %(levelname)s - %(message)s',)
     GlobalParameters.path_list['python3'] = "/home/wang/Workspace/OJ/env/bin/python"
     run()
     # print('test')
