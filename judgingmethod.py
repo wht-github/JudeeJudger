@@ -85,7 +85,7 @@ def judgeCPP(timelimit, memorylimit, inputpath, outputpath, errorpath, id, judge
 
 def compileC(id, code, problem):
     # transfer code into file named with judgername
-    tmp_name = 'tmp_'+str(problem)
+    tmp_name = './RT/tmp_'+str(problem)
     with open('%s.c' % tmp_name, 'w', encoding='utf-8') as f:
         f.write(code)
 
@@ -106,7 +106,7 @@ def compileC(id, code, problem):
 
 
 def compileCPP(id, code, problem):
-    tmp_name = 'tmp_'+str(problem)
+    tmp_name = './RT/tmp_'+str(problem)
     with open('%s.cpp' % tmp_name, 'w', encoding='utf-8') as f:
         f.write(code)
 
@@ -125,7 +125,7 @@ def compileCPP(id, code, problem):
 
 
 def compilePython3(id, code, problem):
-    tmp_name = 'tmp_' + str(problem)
+    tmp_name = './RT/tmp_' + str(problem)
     # file.write("import sys\nblacklist = ['importlib','traceback','os']\nfor mod in blacklist:\n    i = __import__(mod)\n    sys.modules[mod] = None\ndel __builtins__.__dict__['eval']\ndel __builtins__.__dict__['exec']\ndel __builtins__.__dict__['locals']\ndel __builtins__.__dict__['open']\n" +code)
     with open("%s.py" % tmp_name, "w", encoding='utf-8') as f:
         f.write(code)
@@ -181,26 +181,30 @@ def judge(id, code, lang, problem, contest, username, createTime):
             # logger.info('go')
             if lang == 'C':
                 result = judgeC(timelimit, memorylimit, incasePath,
-                                outputPath, errorPath, id, 'tmp_'+str(problem))
+                                outputPath, errorPath, id, './RT/tmp_'+str(problem))
             elif lang == 'C++':
                 result = judgeCPP(timelimit, memorylimit, incasePath,
-                                  outputPath, errorPath, id, 'tmp_'+str(problem))
+                                  outputPath, errorPath, id, './RT/tmp_'+str(problem))
             elif lang == 'Python3':
                 result = judgePython3(timelimit, memorylimit, incasePath,
-                                      outputPath, errorPath, id, "tmp_"+str(problem))
-            if result['result'] == 0:
+                                      outputPath, errorPath, id, "./RT/tmp_"+str(problem))
+            if result['result'] == 0 and result['error'] == 0:
                 logger.debug('Running Successfully')
+                # tmp = 0 if filecmp.cmp(outcasePath, outputPath,False) else -1
+                cmp_info = os.system('diff --strip-trailing-cr %s %s' %(outcasePath, outputPath))
+                tmp = 0 if cmp_info == 0 else -1
                 if retnum == 0:
-                    retnum = 0 if filecmp.cmp(outcasePath, outputPath,False) else -1
-                    if retnum == 0:
-                        total_score += testcaseScore[int(caseid)-1]
-                    logger.debug('case result is %d' % retnum)
+                    retnum = tmp
+                result['result'] = tmp
+                if retnum == 0:
+                    total_score += testcaseScore[int(caseid)-1]
+                logger.debug('case %d result is %d' % (int(caseid), result['result']))
             else:
                 retnum = result['result']
                 logger.debug('case failed with %d' % retnum)
 
             with open(errorPath, 'r') as errordata:
-                result['errorinfo'] = errordata.read()
+                result['error_info'] = errordata.read()
             result_list.append(result)
 
         print(result_list)
@@ -222,7 +226,7 @@ def judge(id, code, lang, problem, contest, username, createTime):
         # raise e
 
     except Exception as e:
-
+        update_submission(id, 5)
         raise e
     else:
         logger.debug('All success')

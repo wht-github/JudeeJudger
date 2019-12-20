@@ -7,6 +7,7 @@ import judgingmethod
 from PCModel import get_consumer_from_singlePool
 import logging
 from judeeerrors import *
+import os
 python3path = "/home/wang/Workspace/OJ/env/bin/python"
 def judgePython3(timelimit, memorylimit, inputpath, outputpath, errorpath, id, judgername):
     # logging.debug(GlobalParameters.path_list['python3'])
@@ -31,6 +32,8 @@ def judgePython3(timelimit, memorylimit, inputpath, outputpath, errorpath, id, j
                        gid=0
                        )
 if __name__ == '__main__':
+    a = os.system('diff --strip-trailing-cr ./RT/out.txt ./ProblemData/39/5.ut')
+    print(a)
     # logging.basicConfig(
     #     level='DEBUG', format='%(name)s - %(levelname)s - %(message)s')
     # submissionId = get_consumer_from_singlePool(
@@ -47,8 +50,8 @@ if __name__ == '__main__':
     # print(a)
     # print(pars.RunningStatus.status)
     # print(pars.RunningStatus.status)
-    a = judgePython3(1000,100,'/home/wang/Workspace/OJ/Judee/in.txt','/home/wang/Workspace/OJ/Judee/out.txt','/home/wang/Workspace/OJ/Judee/err.txt',0,'/home/wang/Workspace/OJ/Judee/a_b')
-    print(a)
+    # a = judgePython3(1000,100,'/home/wang/Workspace/OJ/Judee/in.txt','/home/wang/Workspace/OJ/Judee/out.txt','/home/wang/Workspace/OJ/Judee/err.txt',0,'/home/wang/Workspace/OJ/Judee/a_b')
+    # print(a)
     #   a['result'] = a['result']
     #   f = json.dumps(a)
     #   print(f

@@ -19,9 +19,9 @@ import logging
 # from peewee import BaseModelSelect
 
 
-logger = logging.getLogger("peewee")
-logger.setLevel(logging.DEBUG)
-logger.addHandler(logging.StreamHandler())
+# logger = logging.getLogger("peewee")
+# logger.setLevel(logging.DEBUG)
+# logger.addHandler(logging.StreamHandler())
 
 
 result_map = {
@@ -358,23 +358,23 @@ def update_userdata(user_id, problem_id, result, score):
 
 # discarded
 # def update_submission_by_id(id, result, compile_error_info=None):
-    """
-    if no compile_error_info, it only update result by id
-    else it update result and compile_error_info by id
-    """
-    with db.connection_context():
-        if compile_error_info:
-            a = (
-                submission.update(
-                    result=result, compile_error_info=compile_error_info)
-                .where(submission.ID == id)
-                .execute()
-            )
-        else:
-            a = submission.update(result=result).where(
-                submission.ID == id).execute()
-        # affect num
-        return a
+    # """
+    # if no compile_error_info, it only update result by id
+    # else it update result and compile_error_info by id
+    # """
+    # with db.connection_context():
+    #     if compile_error_info:
+    #         a = (
+    #             submission.update(
+    #                 result=result, compile_error_info=compile_error_info)
+    #             .where(submission.ID == id)
+    #             .execute()
+    #         )
+    #     else:
+    #         a = submission.update(result=result).where(
+    #             submission.ID == id).execute()
+    #     # affect num
+    #     return a
 
 
 # discarded
@@ -477,8 +477,8 @@ def update_oi_rank(contest_id, user_id, problem_id, problem_score):
 def update_acm_rank(contest_id, user_id, problem_id, sub_create_time, result):
     with db.connection_context():
         record = acm_contest_rank.get_or_none(
-            acm_contest_rank.contest_id == contest_id
-            & acm_contest_rank.user_id == user_id
+            acm_contest_rank.contest_id == contest_id,
+            acm_contest_rank.user_id == user_id
         )
 
     if record is None:
