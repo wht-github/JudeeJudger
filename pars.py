@@ -5,7 +5,15 @@ class RunningStatus:
     '''
     status = True
     judgerName = 'Judee'
-
+    __pj = None
+    @classmethod
+    def getProblemParas(cls):
+        if cls.__pj:
+            return cls.__pj
+        else:
+            with open('./conf.d/problemdata.json', 'r') as f:
+                cls.__pj = json.loads(f)
+            return cls.__pj
 class GlobalParameters:
     db_keys = ['db_ip', 'db_pwd', 'db_user', 'db_port']
     server_keys = ['server_ip', 'server_port', 'key']

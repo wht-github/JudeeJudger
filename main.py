@@ -74,6 +74,6 @@ if __name__ == '__main__':
     # logger = logging.getLogger("root")
     # logger.basicConfig(
         # level='DEBUG', format='%(name)s - %(levelname)s - %(message)s',)
-    GlobalParameters.path_list['python3'] = "/home/wang/Workspace/OJ/env/bin/python"
+    GlobalParameters.path_list['python3'] = "/usr/bin/python3.6"
     run()
     # print('test')

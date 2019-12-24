@@ -50,8 +50,8 @@ def run(max_cpu_time,
                 "max_process_number", "uid", "gid", "memory_limit_check_only"]
     str_vars = ["exe_path", "input_path", "output_path", "error_path", "log_path"]
 
-    proc_args = ["/home/wang/Workspace/OJ/Judee/output/libjudger.so"]
-    # proc_args = ["/usr/lib/judger/libjudger.so"]
+    # proc_args = ["/home/wang/Workspace/OJ/Judee/output/libjudger.so"]
+    proc_args = ["/usr/lib/judger/libjudger.so"]
     for var in str_list_vars:
         value = vars()[var]
         if not isinstance(value, list):

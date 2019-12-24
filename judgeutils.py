@@ -1,4 +1,5 @@
 import os
+from pars import RunningStatus as rs
 def PackupTestcases(problem):
     testcases = os.listdir('./ProblemData/%s/' % problem)
     in_list = [i for i in testcases if i.split('.')[1] == 'in']
@@ -7,4 +8,8 @@ def PackupTestcases(problem):
     out_list = sorted(out_list)
     tests = zip(in_list,out_list)
     return tests
+def rsync(problemid):
+    pd = rs.getProblemParas()
+    os.system('sshpass -p "%s" rsync -r  %s:%s/%s ./ProblemData/ --delete'.format(pd['password'], pd['hostaddress'], pd['remotedatapath'], problemid))
+
 

@@ -4,7 +4,9 @@ from judeeerrors import *
 from judgeutils import *
 from pars import *
 import logging
+import json
 import filecmp
+import tempfile
 from pars import *
 # from judeesql import update_submission_by_id, update_ocrank_by_cid_uid, get_contest_type, get_problem_info, update_submission_userdata, update_problem,*
 from judeesql import *
@@ -85,7 +87,7 @@ def judgeCPP(timelimit, memorylimit, inputpath, outputpath, errorpath, id, judge
 
 def compileC(id, code, problem):
     # transfer code into file named with judgername
-    tmp_name = './RT/tmp_'+str(problem)
+    tmp_name = './RT/'+str(id)
     with open('%s.c' % tmp_name, 'w', encoding='utf-8') as f:
         f.write(code)
 
@@ -106,7 +108,7 @@ def compileC(id, code, problem):
 
 
 def compileCPP(id, code, problem):
-    tmp_name = './RT/tmp_'+str(problem)
+    tmp_name = './RT/'+str(id)
     with open('%s.cpp' % tmp_name, 'w', encoding='utf-8') as f:
         f.write(code)
 
@@ -125,7 +127,7 @@ def compileCPP(id, code, problem):
 
 
 def compilePython3(id, code, problem):
-    tmp_name = './RT/tmp_' + str(problem)
+    tmp_name = './RT/' + str(id)
     # file.write("import sys\nblacklist = ['importlib','traceback','os']\nfor mod in blacklist:\n    i = __import__(mod)\n    sys.modules[mod] = None\ndel __builtins__.__dict__['eval']\ndel __builtins__.__dict__['exec']\ndel __builtins__.__dict__['locals']\ndel __builtins__.__dict__['open']\n" +code)
     with open("%s.py" % tmp_name, "w", encoding='utf-8') as f:
         f.write(code)
@@ -141,7 +143,8 @@ def judge(id, code, lang, problem, contest, username, createTime):
         username: user id
     '''
     logger.debug('Synchonizing the TestCases')
-    os.system('sshpass -p "hhs123456" rsync -r  h2s@snail.leeeung.com:/volume4/homes/h2s/test_cases/ /home/wang/Workspace/OJ/Judee/ProblemData/ --delete')
+    # os.system('sshpass -p "hhs123456" rsync -r  h2s@snail.leeeung.com:/volume4/homes/h2s/test_cases/ /home/wang/Workspace/OJ/Judee/ProblemData/ --delete')
+    rsync()
     logger.debug('Synchonizing Finished')
 
     rule = ''
@@ -176,18 +179,19 @@ def judge(id, code, lang, problem, contest, username, createTime):
             outcasePath = './ProblemData/%s/%s' % (problem, outcase)
             # outputPath = './UserData/%s/%s/%s' % (username, problem, outcase)
             # errorPath = './UserData/%s/%s/%s' % (username, problem, caseid)
-            outputPath = './RT/out.txt'
-            errorPath = './RT/error.txt'
+            outputPath = './RT/out_%s.txt' % (str(id))
+            errorPath = './RT/error_%s%.txt' % (str(id))
             # logger.info('go')
+            logpath = './RT/%s' % str(id)
             if lang == 'C':
                 result = judgeC(timelimit, memorylimit, incasePath,
-                                outputPath, errorPath, id, './RT/tmp_'+str(problem))
+                                outputPath, errorPath, id, logpath)
             elif lang == 'C++':
                 result = judgeCPP(timelimit, memorylimit, incasePath,
-                                  outputPath, errorPath, id, './RT/tmp_'+str(problem))
+                                  outputPath, errorPath, id, logpath)
             elif lang == 'Python3':
                 result = judgePython3(timelimit, memorylimit, incasePath,
-                                      outputPath, errorPath, id, "./RT/tmp_"+str(problem))
+                                      outputPath, errorPath, id,logpath)
             if result['result'] == 0 and result['error'] == 0:
                 logger.debug('Running Successfully')
                 # tmp = 0 if filecmp.cmp(outcasePath, outputPath,False) else -1
@@ -205,11 +209,15 @@ def judge(id, code, lang, problem, contest, username, createTime):
 
             with open(errorPath, 'r') as errordata:
                 result['error_info'] = errordata.read()
+            with open('./RT/%sjudger.log' % str(id),'r') as f:
+                result['error_info'] += f.read()
             result_list.append(result)
 
         print(result_list)
     except NotADirectoryError:
         logger.debug('./ProblemData/%s/ not exist' % problem)
+        update_submission(id, 5)
+        raise Exception('no testing data')
         # Update the Database
 
     except CompilerError as e:
