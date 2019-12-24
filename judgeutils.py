@@ -10,6 +10,6 @@ def PackupTestcases(problem):
     return tests
 def rsync(problemid):
     pd = rs.getProblemParas()
-    os.system('sshpass -p "%s" rsync -r  %s:%s/%s ./ProblemData/ --delete'.format(pd['password'], pd['hostaddress'], pd['remotedatapath'], str(problemid)))
+    os.system('sshpass -p "%s" rsync -r  %s:%s/%s /JudeeJudger/ProblemData/ --delete'.format(pd['password'], pd['hostaddress'], pd['remotedatapath'], str(problemid)))
 
 
