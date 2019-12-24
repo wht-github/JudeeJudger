@@ -144,7 +144,7 @@ def judge(id, code, lang, problem, contest, username, createTime):
     '''
     logger.debug('Synchonizing the TestCases')
     # os.system('sshpass -p "hhs123456" rsync -r  h2s@snail.leeeung.com:/volume4/homes/h2s/test_cases/ /home/wang/Workspace/OJ/Judee/ProblemData/ --delete')
-    rsync()
+    rsync(problem)
     logger.debug('Synchonizing Finished')
 
     rule = ''
