@@ -12,7 +12,7 @@ class RunningStatus:
             return cls.__pj
         else:
             with open('./conf.d/problemdata.json', 'r') as f:
-                cls.__pj = json.loads(f)
+                cls.__pj = json.loads(f.read())
             return cls.__pj
 class GlobalParameters:
     db_keys = ['db_ip', 'db_pwd', 'db_user', 'db_port']
