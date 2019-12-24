@@ -180,7 +180,7 @@ def judge(id, code, lang, problem, contest, username, createTime):
             # outputPath = './UserData/%s/%s/%s' % (username, problem, outcase)
             # errorPath = './UserData/%s/%s/%s' % (username, problem, caseid)
             outputPath = './RT/out_%s.txt' % (str(id))
-            errorPath = './RT/error_%s%.txt' % (str(id))
+            errorPath = './RT/error_%s.txt' % (str(id))
             # logger.info('go')
             logpath = './RT/%s' % str(id)
             if lang == 'C':
