@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/wang/Workspace/OJ/Judee/src/argtable3.c
+/JudeeJudger/src/argtable3.c
 argtable3.h
-/home/wang/Workspace/OJ/Judee/src/argtable3.h
+/JudeeJudger/src/argtable3.h
 tchar.h
 -
 stdarg.h
@@ -36,7 +36,7 @@ stdlib.h
 string.h
 -
 argtable3.h
-/home/wang/Workspace/OJ/Judee/src/argtable3.h
+/JudeeJudger/src/argtable3.h
 ctype.h
 -
 string.h
@@ -46,17 +46,17 @@ time.h
 stdlib.h
 -
 argtable3.h
-/home/wang/Workspace/OJ/Judee/src/argtable3.h
+/JudeeJudger/src/argtable3.h
 stdlib.h
 -
 argtable3.h
-/home/wang/Workspace/OJ/Judee/src/argtable3.h
+/JudeeJudger/src/argtable3.h
 string.h
 -
 stdlib.h
 -
 argtable3.h
-/home/wang/Workspace/OJ/Judee/src/argtable3.h
+/JudeeJudger/src/argtable3.h
 stdlib.h
 -
 limits.h
@@ -64,21 +64,21 @@ limits.h
 ctype.h
 -
 argtable3.h
-/home/wang/Workspace/OJ/Judee/src/argtable3.h
+/JudeeJudger/src/argtable3.h
 stdlib.h
 -
 argtable3.h
-/home/wang/Workspace/OJ/Judee/src/argtable3.h
+/JudeeJudger/src/argtable3.h
 stdlib.h
 -
 argtable3.h
-/home/wang/Workspace/OJ/Judee/src/argtable3.h
+/JudeeJudger/src/argtable3.h
 stdlib.h
 -
 string.h
 -
 argtable3.h
-/home/wang/Workspace/OJ/Judee/src/argtable3.h
+/JudeeJudger/src/argtable3.h
 string.h
 -
 stdlib.h
@@ -92,7 +92,7 @@ stdio.h
 stdlib.h
 -
 argtable3.h
-/home/wang/Workspace/OJ/Judee/src/argtable3.h
+/JudeeJudger/src/argtable3.h
 stdlib.h
 -
 string.h
@@ -102,15 +102,15 @@ stdlib.h
 ctype.h
 -
 argtable3.h
-/home/wang/Workspace/OJ/Judee/src/argtable3.h
+/JudeeJudger/src/argtable3.h
 
-/home/wang/Workspace/OJ/Judee/src/argtable3.h
+/JudeeJudger/src/argtable3.h
 stdio.h
 -
 time.h
 -
 
-/home/wang/Workspace/OJ/Judee/src/child.c
+/JudeeJudger/src/child.c
 stdio.h
 -
 stdarg.h
@@ -140,23 +140,23 @@ sys/time.h
 sys/mount.h
 -
 runner.h
-/home/wang/Workspace/OJ/Judee/src/runner.h
+/JudeeJudger/src/runner.h
 child.h
-/home/wang/Workspace/OJ/Judee/src/child.h
+/JudeeJudger/src/child.h
 logger.h
-/home/wang/Workspace/OJ/Judee/src/logger.h
+/JudeeJudger/src/logger.h
 rules/seccomp_rules.h
-/home/wang/Workspace/OJ/Judee/src/rules/seccomp_rules.h
+/JudeeJudger/src/rules/seccomp_rules.h
 killer.h
-/home/wang/Workspace/OJ/Judee/src/killer.h
+/JudeeJudger/src/killer.h
 
-/home/wang/Workspace/OJ/Judee/src/child.h
+/JudeeJudger/src/child.h
 string.h
 -
 runner.h
-/home/wang/Workspace/OJ/Judee/src/runner.h
+/JudeeJudger/src/runner.h
 
-/home/wang/Workspace/OJ/Judee/src/killer.c
+/JudeeJudger/src/killer.c
 pthread.h
 -
 unistd.h
@@ -164,11 +164,11 @@ unistd.h
 signal.h
 -
 killer.h
-/home/wang/Workspace/OJ/Judee/src/killer.h
+/JudeeJudger/src/killer.h
 
-/home/wang/Workspace/OJ/Judee/src/killer.h
+/JudeeJudger/src/killer.h
 
-/home/wang/Workspace/OJ/Judee/src/logger.c
+/JudeeJudger/src/logger.c
 stdio.h
 -
 stdlib.h
@@ -182,17 +182,17 @@ unistd.h
 sys/file.h
 -
 logger.h
-/home/wang/Workspace/OJ/Judee/src/logger.h
+/JudeeJudger/src/logger.h
 
-/home/wang/Workspace/OJ/Judee/src/logger.h
+/JudeeJudger/src/logger.h
 
-/home/wang/Workspace/OJ/Judee/src/main.c
+/JudeeJudger/src/main.c
 argtable3.h
-/home/wang/Workspace/OJ/Judee/src/argtable3.h
+/JudeeJudger/src/argtable3.h
 runner.h
-/home/wang/Workspace/OJ/Judee/src/runner.h
+/JudeeJudger/src/runner.h
 
-/home/wang/Workspace/OJ/Judee/src/rules/c_cpp.c
+/JudeeJudger/src/rules/c_cpp.c
 stdio.h
 -
 seccomp.h
@@ -204,9 +204,9 @@ sys/stat.h
 fcntl.h
 -
 ../runner.h
-/home/wang/Workspace/OJ/Judee/src/runner.h
+/JudeeJudger/src/runner.h
 
-/home/wang/Workspace/OJ/Judee/src/rules/general.c
+/JudeeJudger/src/rules/general.c
 stdio.h
 -
 seccomp.h
@@ -220,13 +220,13 @@ fcntl.h
 errno.h
 -
 ../runner.h
-/home/wang/Workspace/OJ/Judee/src/runner.h
+/JudeeJudger/src/runner.h
 
-/home/wang/Workspace/OJ/Judee/src/rules/seccomp_rules.h
+/JudeeJudger/src/rules/seccomp_rules.h
 ../runner.h
-/home/wang/Workspace/OJ/Judee/src/runner.h
+/JudeeJudger/src/runner.h
 
-/home/wang/Workspace/OJ/Judee/src/runner.c
+/JudeeJudger/src/runner.c
 stdio.h
 -
 stdlib.h
@@ -250,15 +250,15 @@ sys/resource.h
 sys/types.h
 -
 runner.h
-/home/wang/Workspace/OJ/Judee/src/runner.h
+/JudeeJudger/src/runner.h
 killer.h
-/home/wang/Workspace/OJ/Judee/src/killer.h
+/JudeeJudger/src/killer.h
 child.h
-/home/wang/Workspace/OJ/Judee/src/child.h
+/JudeeJudger/src/child.h
 logger.h
-/home/wang/Workspace/OJ/Judee/src/logger.h
+/JudeeJudger/src/logger.h
 
-/home/wang/Workspace/OJ/Judee/src/runner.h
+/JudeeJudger/src/runner.h
 sys/types.h
 -
 stdio.h

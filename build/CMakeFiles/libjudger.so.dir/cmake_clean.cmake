@@ -4,9 +4,9 @@ file(REMOVE_RECURSE
   "CMakeFiles/libjudger.so.dir/src/killer.o"
   "CMakeFiles/libjudger.so.dir/src/logger.o"
   "CMakeFiles/libjudger.so.dir/src/main.o"
+  "CMakeFiles/libjudger.so.dir/src/runner.o"
   "CMakeFiles/libjudger.so.dir/src/rules/c_cpp.o"
   "CMakeFiles/libjudger.so.dir/src/rules/general.o"
-  "CMakeFiles/libjudger.so.dir/src/runner.o"
   "../output/libjudger.so.pdb"
   "../output/libjudger.so"
 )

@@ -4,14 +4,14 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/wang/Workspace/OJ/Judee/src/argtable3.c" "/home/wang/Workspace/OJ/Judee/build/CMakeFiles/libjudger.so.dir/src/argtable3.o"
-  "/home/wang/Workspace/OJ/Judee/src/child.c" "/home/wang/Workspace/OJ/Judee/build/CMakeFiles/libjudger.so.dir/src/child.o"
-  "/home/wang/Workspace/OJ/Judee/src/killer.c" "/home/wang/Workspace/OJ/Judee/build/CMakeFiles/libjudger.so.dir/src/killer.o"
-  "/home/wang/Workspace/OJ/Judee/src/logger.c" "/home/wang/Workspace/OJ/Judee/build/CMakeFiles/libjudger.so.dir/src/logger.o"
-  "/home/wang/Workspace/OJ/Judee/src/main.c" "/home/wang/Workspace/OJ/Judee/build/CMakeFiles/libjudger.so.dir/src/main.o"
-  "/home/wang/Workspace/OJ/Judee/src/rules/c_cpp.c" "/home/wang/Workspace/OJ/Judee/build/CMakeFiles/libjudger.so.dir/src/rules/c_cpp.o"
-  "/home/wang/Workspace/OJ/Judee/src/rules/general.c" "/home/wang/Workspace/OJ/Judee/build/CMakeFiles/libjudger.so.dir/src/rules/general.o"
-  "/home/wang/Workspace/OJ/Judee/src/runner.c" "/home/wang/Workspace/OJ/Judee/build/CMakeFiles/libjudger.so.dir/src/runner.o"
+  "/JudeeJudger/src/argtable3.c" "/JudeeJudger/build/CMakeFiles/libjudger.so.dir/src/argtable3.o"
+  "/JudeeJudger/src/child.c" "/JudeeJudger/build/CMakeFiles/libjudger.so.dir/src/child.o"
+  "/JudeeJudger/src/killer.c" "/JudeeJudger/build/CMakeFiles/libjudger.so.dir/src/killer.o"
+  "/JudeeJudger/src/logger.c" "/JudeeJudger/build/CMakeFiles/libjudger.so.dir/src/logger.o"
+  "/JudeeJudger/src/main.c" "/JudeeJudger/build/CMakeFiles/libjudger.so.dir/src/main.o"
+  "/JudeeJudger/src/rules/c_cpp.c" "/JudeeJudger/build/CMakeFiles/libjudger.so.dir/src/rules/c_cpp.o"
+  "/JudeeJudger/src/rules/general.c" "/JudeeJudger/build/CMakeFiles/libjudger.so.dir/src/rules/general.o"
+  "/JudeeJudger/src/runner.c" "/JudeeJudger/build/CMakeFiles/libjudger.so.dir/src/runner.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

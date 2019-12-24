@@ -1,4 +1,4 @@
-# Install script for directory: /home/wang/Workspace/OJ/Judee
+# Install script for directory: /JudeeJudger
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -29,7 +29,7 @@ endif()
 
 # Install shared libraries without execute permission?
 if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
-  set(CMAKE_INSTALL_SO_NO_EXE "0")
+  set(CMAKE_INSTALL_SO_NO_EXE "1")
 endif()
 
 # Is this installation the result of a crosscompile?
@@ -46,7 +46,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/usr/lib/judger" TYPE FILE PERMISSIONS OWNER_EXECUTE OWNER_READ FILES "/home/wang/Workspace/OJ/Judee/output/libjudger.so")
+file(INSTALL DESTINATION "/usr/lib/judger" TYPE FILE PERMISSIONS OWNER_EXECUTE OWNER_READ FILES "/JudeeJudger/output/libjudger.so")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -57,5 +57,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/wang/Workspace/OJ/Judee/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/JudeeJudger/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
