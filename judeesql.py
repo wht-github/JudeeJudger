@@ -268,7 +268,7 @@ def update_compile_error(id, result, compile_error_info):
         a = (
             user_userdata.update(submit=user_userdata.submit + 1)
             .where(user_userdata.username_id == sub.username_id)
-            .get()
+            # .get()
         )
         sub.result = result
         sub.compile_error_info = compile_error_info

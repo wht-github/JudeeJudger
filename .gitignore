@@ -1,3 +1,7 @@
 *.log
 ProblemData/*
 UserData/*
+test.py
+__pycache__
+build/
+test.*
