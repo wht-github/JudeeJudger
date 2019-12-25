@@ -83,11 +83,32 @@ def judgeCPP(timelimit, memorylimit, inputpath, outputpath, errorpath, id, judge
                        uid=0,
                        gid=0
                        )
+def judgeJava(timelimit, memorylimit, inputpath, outputpath, errorpath, id, judgername):
+    return _judger.run(max_cpu_time=timelimit,
+                       max_real_time=timelimit*10,
+                       max_memory=-1,
+                       max_process_number=200,
+                       max_output_size=-1,
+                       max_stack=-1,
+                       # five args above can be _judger.UNLIMITED
+                       exe_path="java",
+                       input_path=inputpath,
+                       output_path=outputpath,
+                       error_path=errorpath,
+                       args=['-cp %s -XX:MaxRAM=%dk -Djava.security.manager -Dfile.encoding=UTF-8 -Djava.security.policy==/etc/java_policy -Djava.awt.headless=true Main' % ('./RT/'+str(id), 1024*3*memorylimit)],
+                       # can be empty list
+                       env=[],
+                       log_path=judgername+"judger.log",
+                       # can be None
+                       seccomp_rule_name=None,
+                       uid=0,
+                       gid=0
+                       )
 
 
-def compileC(id, code, problem):
+def compileC(id, code, workpath):
     # transfer code into file named with judgername
-    tmp_name = './RT/'+str(id)
+    tmp_name = workpath+'/'+str(id)
     with open('%s.c' % tmp_name, 'w', encoding='utf-8') as f:
         f.write(code)
 
@@ -107,8 +128,8 @@ def compileC(id, code, problem):
             raise CompilerError(msg)
 
 
-def compileCPP(id, code, problem):
-    tmp_name = './RT/'+str(id)
+def compileCPP(id, code, workpath):
+    tmp_name = workpath+'/'+str(id)
     with open('%s.cpp' % tmp_name, 'w', encoding='utf-8') as f:
         f.write(code)
 
@@ -126,12 +147,29 @@ def compileCPP(id, code, problem):
             raise CompilerError(msg)
 
 
-def compilePython3(id, code, problem):
-    tmp_name = './RT/' + str(id)
+def compilePython3(id, code, workpath):
+    tmp_name = workpath+'/'+ str(id)
     # file.write("import sys\nblacklist = ['importlib','traceback','os']\nfor mod in blacklist:\n    i = __import__(mod)\n    sys.modules[mod] = None\ndel __builtins__.__dict__['eval']\ndel __builtins__.__dict__['exec']\ndel __builtins__.__dict__['locals']\ndel __builtins__.__dict__['open']\n" +code)
     with open("%s.py" % tmp_name, "w", encoding='utf-8') as f:
         f.write(code)
+def compileJava(id,code,workpath):
+    tmp_name = workpath+'/'+'Main.java'
+    cepath = workpath + '/' +'ce.txt'
+    with open('%s.java' % tmp_name, 'w', encoding='utf-8') as f:
+        f.write(code)
 
+    result = os.system("javac %s -d %s 2>%s" %
+                       (tmp_name, workpath, cepath))
+    if result != 0:
+        try:
+            with open(cepath, 'r') as f:
+                msg = str(f.read())
+            if msg == '':
+                msg = 'Compile timeout! Maybe you define too big arrays!'
+            raise CompilerError(msg)
+        except FileNotFoundError:
+            msg = str('Fatal Compile error!')
+            raise CompilerError(msg)
 
 def judge(id, code, lang, problem, contest, username, createTime):
     '''
@@ -162,13 +200,17 @@ def judge(id, code, lang, problem, contest, username, createTime):
     total_score = 0
     try:
         tests = PackupTestcases(problem)
-
+        workpath ='./RT/%s' % str(id)
+        if not os.path.exists('./RT/%s' % str(id)):
+            os.makedirs(workpath)
         if lang == 'C':
-            compileC(id, code, problem)
+            compileC(id, code, workpath)
         elif lang == 'C++':
-            compileCPP(id, code, problem)
+            compileCPP(id, code, workpath)
         elif lang == 'Python3':
-            compilePython3(id, code, problem)
+            compilePython3(id, code, workpath)
+        elif lang == 'Java':
+            compileJava(id,code,workpath)
         else:
             raise Exception('No language support')
 
@@ -179,10 +221,10 @@ def judge(id, code, lang, problem, contest, username, createTime):
             outcasePath = './ProblemData/%s/%s' % (problem, outcase)
             # outputPath = './UserData/%s/%s/%s' % (username, problem, outcase)
             # errorPath = './UserData/%s/%s/%s' % (username, problem, caseid)
-            outputPath = './RT/out_%s.txt' % (str(id))
-            errorPath = './RT/error_%s.txt' % (str(id))
+            outputPath = '%s/out_%s.txt' % (workpath,str(id))
+            errorPath = '%s/error_%s.txt' % (workpath,str(id))
             # logger.info('go')
-            logpath = './RT/%s' % str(id)
+            logpath = '%s/%s' % (workpath, str(id))
             if lang == 'C':
                 result = judgeC(timelimit, memorylimit, incasePath,
                                 outputPath, errorPath, id, logpath)
@@ -191,6 +233,9 @@ def judge(id, code, lang, problem, contest, username, createTime):
                                   outputPath, errorPath, id, logpath)
             elif lang == 'Python3':
                 result = judgePython3(timelimit, memorylimit, incasePath,
+                                      outputPath, errorPath, id,logpath)
+            elif lang == 'Java':
+                result = judgeJava(timelimit, memorylimit, incasePath,
                                       outputPath, errorPath, id,logpath)
             if result['result'] == 0 and result['error'] == 0:
                 logger.debug('Running Successfully')
@@ -209,7 +254,7 @@ def judge(id, code, lang, problem, contest, username, createTime):
 
             with open(errorPath, 'r') as errordata:
                 result['error_info'] = errordata.read()
-            with open('./RT/%sjudger.log' % str(id),'r') as f:
+            with open('%s/%sjudger.log' % (workpath,str(id)),'r') as f:
                 result['error_info'] += f.read()
             result_list.append(result)
 
