@@ -224,7 +224,7 @@ def judge(id, code, lang, problem, contest, username, createTime):
             outputPath = '%s/out_%s.txt' % (workpath,str(id))
             errorPath = '%s/error_%s.txt' % (workpath,str(id))
             # logger.info('go')
-            logpath = '%s/%s' % (workpath, str(id))
+            logpath = '%s/%s/' % (workpath, str(id))
             if lang == 'C':
                 result = judgeC(timelimit, memorylimit, incasePath,
                                 outputPath, errorPath, id, logpath)
@@ -254,7 +254,7 @@ def judge(id, code, lang, problem, contest, username, createTime):
 
             with open(errorPath, 'r') as errordata:
                 result['error_info'] = errordata.read()
-            with open('%s/%sjudger.log' % (workpath,str(id)),'r') as f:
+            with open('%s/%s/judger.log' % (workpath,str(id)),'r') as f:
                 result['error_info'] += f.read()
             result_list.append(result)
 
