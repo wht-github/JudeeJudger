@@ -195,7 +195,7 @@ def judge(id, code, lang, problem, contest, username, createTime):
             if result['result'] == 0 and result['error'] == 0:
                 logger.debug('Running Successfully')
                 # tmp = 0 if filecmp.cmp(outcasePath, outputPath,False) else -1
-                cmp_info = os.system('diff --strip-trailing-cr %s %s' %(outcasePath, outputPath))
+                cmp_info = os.system('diff --strip-trailing-cr --ignore-trailing-space %s %s' %(outcasePath, outputPath))
                 tmp = 0 if cmp_info == 0 else -1
                 if retnum == 0:
                     retnum = tmp

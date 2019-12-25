@@ -273,7 +273,7 @@ def update_compile_error(id, result, compile_error_info):
         sub.result = result
         sub.compile_error_info = compile_error_info
         # affect num
-        # return sub.save() + 
+        # return sub.save() + a
         return sub.save()
 
 
