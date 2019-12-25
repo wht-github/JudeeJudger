@@ -274,7 +274,7 @@ def update_compile_error(id, result, compile_error_info):
         sub.compile_error_info = compile_error_info
         # affect num
         # return sub.save() + 
-        return
+        return sub.save()
 
 
 def update_run_time(id, result, info):
