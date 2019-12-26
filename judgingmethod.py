@@ -254,7 +254,7 @@ def judge(id, code, lang, problem, contest, username, createTime):
 
             with open(errorPath, 'r') as errordata:
                 result['error_info'] = errordata.read()
-            with open('%s/%s/judger.log' % (workpath,str(id)),'r') as f:
+            with open('%s/%sjudger.log' % (workpath,str(id)),'r') as f:
                 result['error_info'] += f.read()
             result_list.append(result)
 
