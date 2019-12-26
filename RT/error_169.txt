@@ -1,1 +1,0 @@
-/usr/bin/python3.6: error while loading shared libraries: libm.so.6: failed to map segment from shared object

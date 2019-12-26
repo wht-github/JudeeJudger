@@ -147,7 +147,6 @@ class contest(BaseModel):
 
 class contest_problem(BaseModel):
     id = IntegerField(primary_key=True)
-    name = CharField(max_length=5)
     problem_id = IntegerField()
     contest_id = IntegerField()
     first_ac_id = CharField(max_length=50)
@@ -446,14 +445,7 @@ def update_oi_rank(contest_id, user_id, problem_id, problem_score):
         )
 
     if record is None:
-        with db.connection_context():
-            max_id = (
-                oi_contest_rank.select(fn.MAX(oi_contest_rank.id).alias("max"))
-                .get()
-                .max
-            )
         record = oi_contest_rank(
-            id=max_id + 1,
             user_id=user_id,
             contest_id=contest_id,
             submission_number=0,
@@ -464,11 +456,11 @@ def update_oi_rank(contest_id, user_id, problem_id, problem_score):
     record.submission_number += 1
 
     add_score = max(
-        problem_score - record.submission_info.get(problem_id, 0), 0)
+        problem_score - record.submission_info.get(str(problem_id), 0), 0)
     record.total_score += add_score
 
     record.submission_info[problem_id] = max(
-        record.submission_info.get(problem_id, 0), problem_score
+        record.submission_info.get(str(problem_id), 0), problem_score
     )
 
     with db.connection_context():
@@ -483,17 +475,9 @@ def update_acm_rank(contest_id, user_id, problem_id, sub_create_time, result):
         )
 
     if record is None:
-        with db.connection_context():
-            max_id = (
-                acm_contest_rank.select(
-                    fn.MAX(acm_contest_rank.id).alias("max"))
-                .get()
-                .max
-            )
             # print(max_id)
             # assert False
         record = acm_contest_rank(
-            # id=(max_id + 1 if  max_id else 1),
             user_id=user_id,
             contest_id=contest_id,
             submission_number=0,
