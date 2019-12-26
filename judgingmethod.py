@@ -92,7 +92,7 @@ def judgeJava(timelimit, memorylimit, inputpath, outputpath, errorpath, id, judg
                        max_output_size=-1,
                        max_stack=-1,
                        # five args above can be _judger.UNLIMITED
-                       exe_path="java"+'-cp %s -XX:MaxRAM=%dk -Djava.security.manager -Dfile.encoding=UTF-8 -Djava.security.policy==/etc/java_policy -Djava.awt.headless=true Main' % ('./RT/'+str(id)+'/', 1024*3*memorylimit),
+                       exe_path="java"+'-cp %s -XX:MaxRAM=%dk -Djava.security.manager -Dfile.encoding=UTF-8 -Djava.security.policy==/etc/java_policy -Djava.awt.headless=true Main' % ('./RT/'+str(id)+'/', 800*1024),
                        input_path=inputpath,
                        output_path=outputpath,
                        error_path=errorpath,
