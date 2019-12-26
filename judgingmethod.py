@@ -155,7 +155,7 @@ def compilePython3(id, code, workpath):
 def compileJava(id,code,workpath):
     tmp_name = workpath+'/'+'Main.java'
     cepath = workpath + '/' +'ce.txt'
-    with open('%s.java' % tmp_name, 'w', encoding='utf-8') as f:
+    with open(tmp_name, 'w', encoding='utf-8') as f:
         f.write(code)
 
     result = os.system("javac %s -d %s 2>%s" %
