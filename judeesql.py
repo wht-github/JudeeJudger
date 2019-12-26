@@ -147,7 +147,7 @@ class contest(BaseModel):
 
 class contest_problem(BaseModel):
     id = IntegerField(primary_key=True)
-    name = CharField(max_length=5)
+    # name = CharField(max_length=5)
     problem_id = IntegerField()
     contest_id = IntegerField()
     first_ac_id = CharField(max_length=50)
