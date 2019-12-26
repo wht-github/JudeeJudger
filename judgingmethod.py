@@ -95,7 +95,7 @@ def judgeJava(timelimit, memorylimit, inputpath, outputpath, errorpath, id, judg
                        input_path=inputpath,
                        output_path=outputpath,
                        error_path=errorpath,
-                       args=['-cp %s -XX:MaxRAM=%dk -Djava.security.manager -Dfile.encoding=UTF-8 -Djava.security.policy==/etc/java_policy -Djava.awt.headless=true Main' % ('./RT/'+str(id), 1024*3*memorylimit)],
+                       args=['-cp %s -XX:MaxRAM=%dk -Djava.security.manager -Dfile.encoding=UTF-8 -Djava.security.policy==/etc/java_policy -Djava.awt.headless=true Main' % ('./RT/'+str(id)+'/', 1024*3*memorylimit)],
                        # can be empty list
                        env=[],
                        log_path=judgername+"judger.log",
