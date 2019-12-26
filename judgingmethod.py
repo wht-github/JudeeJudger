@@ -196,7 +196,7 @@ def judge(id, code, lang, problem, contest, username, createTime):
                 if retnum == 0:
                     retnum = tmp
                 result['result'] = tmp
-                if retnum == 0:
+                if result['result] == 0:
                     total_score += testcaseScore[int(caseid)-1]
                 logger.debug('case %d result is %d' % (int(caseid), result['result']))
             else:
