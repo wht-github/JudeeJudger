@@ -83,20 +83,20 @@ def judgeCPP(timelimit, memorylimit, inputpath, outputpath, errorpath, id, judge
                        uid=0,
                        gid=0
                        )
-def judgeJava(timelimit, memorylimit, inputpath, outputpath, errorpath, id, judgername):
+def judgeJava(timelimit, memorylimit, inputpath, outputpath, errorpath, id, judgername,workpath):
     print('-cp %s -XX:MaxRAM=%dk -Djava.security.manager -Dfile.encoding=UTF-8 -Djava.security.policy==/etc/java_policy -Djava.awt.headless=true Main' % ('./RT/'+str(id)+'/', 1024*3*memorylimit))
     return _judger.run(max_cpu_time=timelimit,
-                       max_real_time=timelimit*10,
-                       max_memory=-1,
+                       max_real_time=timelimit*3,
+                       max_memory=1024*1024*512,
                        max_process_number=-1,
                        max_output_size=32 * 1024 * 1024,
                        max_stack=32 * 1024 * 1024,
                        # five args above can be _judger.UNLIMITED
-                       exe_path="java"+' -cp %s -Djava.security.manager -Dfile.encoding=UTF-8 -Djava.security.policy==/etc/java_policy -Djava.awt.headless=true Main' % ('./RT/'+str(id)+'/'),
+                       exe_path='usr/bin/java',
                        input_path=inputpath,
                        output_path=outputpath,
                        error_path=errorpath,
-                       args=[],
+                       args=['Main','-cp %s' % workpath, '-Djava.security.manager','-Djava.awt.headless=true'],
                        # can be empty list
                        env=[],
                        log_path=judgername+"judger.log",
@@ -238,7 +238,7 @@ def judge(id, code, lang, problem, contest, username, createTime):
                                       outputPath, errorPath, id,logpath)
             elif lang == 'Java':
                 result = judgeJava(timelimit, memorylimit, incasePath,
-                                      outputPath, errorPath, id,logpath)
+                                      outputPath, errorPath, id,logpath,workpath)
             if result['result'] == 0 and result['error'] == 0:
                 logger.debug('Running Successfully')
                 # tmp = 0 if filecmp.cmp(outcasePath, outputPath,False) else -1
