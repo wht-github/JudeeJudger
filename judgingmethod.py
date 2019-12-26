@@ -84,7 +84,6 @@ def judgeCPP(timelimit, memorylimit, inputpath, outputpath, errorpath, id, judge
                        gid=0
                        )
 def judgeJava(timelimit, memorylimit, inputpath, outputpath, errorpath, id, judgername,workpath):
-    print('-cp %s -XX:MaxRAM=%dk -Djava.security.manager -Dfile.encoding=UTF-8 -Djava.security.policy==/etc/java_policy -Djava.awt.headless=true Main' % ('./RT/'+str(id)+'/', 1024*3*memorylimit))
     return _judger.run(max_cpu_time=timelimit,
                        max_real_time=timelimit*3,
                        max_memory=1024*1024*512,
@@ -92,7 +91,7 @@ def judgeJava(timelimit, memorylimit, inputpath, outputpath, errorpath, id, judg
                        max_output_size=32 * 1024 * 1024,
                        max_stack=32 * 1024 * 1024,
                        # five args above can be _judger.UNLIMITED
-                       exe_path='usr/bin/java',
+                       exe_path='/usr/bin/java',
                        input_path=inputpath,
                        output_path=outputpath,
                        error_path=errorpath,
