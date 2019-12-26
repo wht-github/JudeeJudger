@@ -95,7 +95,7 @@ def judgeJava(timelimit, memorylimit, inputpath, outputpath, errorpath, id, judg
                        input_path=inputpath,
                        output_path=outputpath,
                        error_path=errorpath,
-                       args=['Main','-cp %s' % workpath, '-Djava.security.manager','-Djava.awt.headless=true'],
+                       args=['Main','-cp %s/' % workpath, '-Djava.security.manager','-Djava.awt.headless=true'],
                        # can be empty list
                        env=[],
                        log_path=judgername+"judger.log",
