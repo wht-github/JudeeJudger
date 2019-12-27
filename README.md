@@ -1,1 +1,2 @@
-在本地单独记录每个提交的log
+The Judger of Online Judge System Judee.
+The sandbox is using  QingDaoU's module.(https://github.com/QingdaoU/Judger)
